@@ -32,7 +32,7 @@ namespace KooliProjekt.Application.Data
 
             var manufacturerEntities = manufacturers
                 .Select(name => new CarManufacturer { Name = name })
-                .ToList();
+                .ToList(); 
 
             context.CarManufacturers.AddRange(manufacturerEntities);
             await context.SaveChangesAsync();
