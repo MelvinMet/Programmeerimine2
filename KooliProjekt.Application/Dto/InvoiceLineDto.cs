@@ -1,0 +1,18 @@
+using System;
+
+namespace KooliProjekt.Application.Dto
+{
+    public class InvoiceLineDto
+    {
+        public int Id { get; set; }
+        public string LineItem { get; set; }
+        public string Unit { get; set; }
+        public decimal Price { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Total { get; set; }
+        public int BookingId { get; set; }
+        public string RegistrationNo { get; set; }
+        public DateTime BookingStarted { get; set; }
+        public DateTime BookingFinished { get; set; }
+    }
+}

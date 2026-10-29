@@ -1,7 +1,7 @@
 @KooliProjekt.WebAPI_HostAddress = http://localhost:5086
 
 ### Users List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/Users/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/Users/list/1/10
 Accept: application/json
 
 ### Users Get: 200 (olemasolev ID)
@@ -25,7 +25,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/Users/get
 Accept: application/json
 
 ### Cars List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/Cars/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/Cars/list/1/10
 Accept: application/json
 
 ### Cars Get: 200 (olemasolev ID)
@@ -49,7 +49,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/Cars/get
 Accept: application/json
 
 ### Bookings List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/Bookings/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/Bookings/list/1/10
 Accept: application/json
 
 ### Bookings Get: 200 (olemasolev ID)
@@ -73,7 +73,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/Bookings/get
 Accept: application/json
 
 ### Invoices List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/Invoices/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/Invoices/list/1/10
 Accept: application/json
 
 ### Invoices Get: 200 (olemasolev ID)
@@ -97,7 +97,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/Invoices/get
 Accept: application/json
 
 ### InvoiceLines List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/InvoiceLines/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/InvoiceLines/list/1/10
 Accept: application/json
 
 ### InvoiceLines Get: 200 (olemasolev ID)
@@ -121,7 +121,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/InvoiceLines/get
 Accept: application/json
 
 ### CarModels List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/CarModels/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/CarModels/list/1/10
 Accept: application/json
 
 ### CarModels Get: 200 (olemasolev ID)
@@ -145,7 +145,7 @@ GET {{KooliProjekt.WebAPI_HostAddress}}/api/CarModels/get
 Accept: application/json
 
 ### CarManufacturers List: 200
-GET {{KooliProjekt.WebAPI_HostAddress}}/api/CarManufacturers/list
+GET {{KooliProjekt.WebAPI_HostAddress}}/api/CarManufacturers/list/1/10
 Accept: application/json
 
 ### CarManufacturers Get: 200 (olemasolev ID)

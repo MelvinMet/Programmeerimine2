@@ -26,27 +26,17 @@ namespace KooliProjekt.WebAPI.Controllers
             var query = new GetBookingQuery { Id = id.Value };
             var result = await _mediator.Send(query, cancellationToken);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Json(result);
+            return Result(result);
         }
 
+        [HttpGet("list/{page:int}/{pageSize:int}")]
         [HttpGet("list")]
-        public async Task<IActionResult> List(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> List(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
-            var query = new ListBookingsQuery();
+            var query = new ListBookingsQuery { Page = page, PageSize = pageSize };
             var result = await _mediator.Send(query, cancellationToken);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Json(result);
+            return Result(result);
         }
     }
 }
-
