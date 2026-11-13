@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using KooliProjekt.Application.Features.Cars;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace KooliProjekt.WebAPI.Controllers
 {
@@ -46,5 +48,29 @@ namespace KooliProjekt.WebAPI.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteCarCommand command, CancellationToken cancellationToken = default)
             => Result(await _mediator.Send(command, cancellationToken));
+
+        [HttpPost("{id:int}/files")]
+        public async Task<IActionResult> AddFile(int id, IFormFile file, CancellationToken cancellationToken = default)
+        {
+            if (file == null) return BadRequest();
+            await using var stream = file.OpenReadStream();
+            return Result(await _mediator.Send(new AddFileCommand { Id = id, FileName = Path.GetFileName(file.FileName), InputStream = stream }, cancellationToken));
+        }
+
+        [HttpGet("{id:int}/files")]
+        public async Task<IActionResult> ListFiles(int id, CancellationToken cancellationToken = default)
+            => Result(await _mediator.Send(new ListFilesQuery { Id = id }, cancellationToken));
+
+        [HttpGet("{id:int}/files/{fileName}")]
+        public async Task<IActionResult> GetFile(int id, string fileName, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetFileQuery { Id = id, FileName = fileName }, cancellationToken);
+            if (result?.Value == null) return NotFound();
+            return File(result.Value, "application/octet-stream", fileName);
+        }
+
+        [HttpDelete("{id:int}/files/{fileName}")]
+        public async Task<IActionResult> DeleteFile(int id, string fileName, CancellationToken cancellationToken = default)
+            => Result(await _mediator.Send(new DeleteFileCommand { Id = id, FileName = fileName }, cancellationToken));
     }
 }
