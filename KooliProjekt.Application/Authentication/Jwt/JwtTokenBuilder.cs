@@ -1,0 +1,28 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+
+namespace KooliProjekt.Application.Authentication.Jwt
+{
+    public class JwtTokenBuilder
+    {
+        private readonly JwtSettings _settings;
+        public JwtTokenBuilder(JwtSettings settings) => _settings = settings;
+
+        public string GenerateToken(params Claim[] claims)
+        {
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Issuer = _settings.Issuer,
+                Audience = _settings.Audience,
+                Expires = DateTime.UtcNow.AddMinutes(_settings.ExpireMinutes),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key)), SecurityAlgorithms.HmacSha256)
+            };
+            var handler = new JwtSecurityTokenHandler();
+            return handler.WriteToken(handler.CreateToken(descriptor));
+        }
+    }
+}

@@ -13,6 +13,15 @@ namespace KooliProjekt.Application.Data
             // Kui algandmed on juba lisatud, ära lisa neid uuesti.
             if (await context.Users.AnyAsync())
             {
+                if (!await context.Users.AnyAsync(user => user.Email == "admin@example.com"))
+                {
+                    context.Users.Add(new User { Name = "Demo Admin", Phone = "+37255500001", Email = "admin@example.com", IsAdmin = true, Password = KooliProjekt.Application.Authentication.PasswordHelper.Hash("DemoPassword123!") });
+                }
+                if (!await context.Users.AnyAsync(user => user.Email == "user@example.com"))
+                {
+                    context.Users.Add(new User { Name = "Demo User", Phone = "+37255500002", Email = "user@example.com", IsAdmin = false, Password = KooliProjekt.Application.Authentication.PasswordHelper.Hash("DemoPassword123!") });
+                }
+                await context.SaveChangesAsync();
                 return;
             }
 
@@ -83,7 +92,7 @@ namespace KooliProjekt.Application.Data
                     Phone = $"+372555{i:00000}",
                     Email = $"klient{i + 1:00}@example.com",
                     IsAdmin = i == 0,
-                    Password = "DemoPassword123!"
+                    Password = KooliProjekt.Application.Authentication.PasswordHelper.Hash("DemoPassword123!")
                 })
                 .ToList();
 
